@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Our Little Universe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--b1:#fdf2f8;--b2:#ede9fe;--tx:#3b1d4f;--mu:#7c5a92;--gl:rgba(255,255,255,.62);--bd:rgba(168,85,247,.24);--a1:#ec4899;--a2:#8b5cf6;--sh:0 8px 30px rgba(139,92,246,.18);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--b1:#1e1034;--b2:#2f1853;--tx:#fbe8ff;--mu:#c9aee0;--gl:rgba(70,35,110,.55);--bd:rgba(216,180,254,.25);--sh:0 8px 30px rgba(0,0,0,.35);color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;font:16px/1.55 Nunito,system-ui,sans-serif;color:var(--tx);background:var(--b1) linear-gradient(135deg,var(--b1),var(--b2)) fixed}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--b1)}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;margin:0}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:6px;align-items:center;padding:10px 16px;background:var(--gl);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd);overflow-x:auto}
+nav .br{font:700 1.35rem "Cormorant Garamond",Georgia,serif;margin-right:auto;white-space:nowrap}
+nav a{white-space:nowrap;padding:8px 14px;border-radius:99px;color:var(--tx);text-decoration:none;font-weight:600;transition:.25s}
+nav a:hover,nav a.on{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;transform:translateY(-2px);box-shadow:var(--sh)}
+main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+.pg{animation:fade .6s both}
+.pg-mem{--a1:#f472b6;--a2:#c084fc}.pg-love{--a1:#d946ef;--a2:#fb7185}.pg-dreams{--a1:#818cf8;--a2:#a855f7}.pg-ach{--a1:#f472b6;--a2:#f59e0b}
+.hero{text-align:center;padding:40px 8px 20px}
+.hero h1,.ph h2{font-size:clamp(2.6rem,9vw,4.8rem);line-height:1.05;background:linear-gradient(135deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent;padding:4px 0}
+.ph{text-align:center;margin-bottom:18px}.ph h2{font-size:clamp(2.2rem,7vw,3.6rem)}.ph p,.hero p{color:var(--mu);font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:1.25rem;margin:6px auto;max-width:34em}
+.heart{width:120px;height:120px;margin:0 auto;filter:drop-shadow(0 0 18px #f472b6);animation:beat 2.2s infinite}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px}
+.tiles a{text-decoration:none;color:var(--tx);text-align:center;font-size:2rem}.tiles b{display:block;font:700 1.4rem "Cormorant Garamond",Georgia,serif}.tiles small{display:block;font-size:.9rem;color:var(--mu)}
+.card{background:var(--gl);backdrop-filter:blur(12px);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--sh);padding:16px;transition:.3s;animation:pop .5s both}
+.card:hover{transform:translateY(-6px) rotate(var(--r,0deg));box-shadow:0 16px 40px rgba(139,92,246,.3)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-bottom:12px}
+.bar2{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:14px 0 22px}
+.b{border:0;border-radius:99px;padding:10px 18px;font:600 .95rem Nunito,sans-serif;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2));cursor:pointer;transition:.25s}.b:hover{transform:translateY(-2px) scale(1.04);box-shadow:var(--sh)}
+.ghost{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.chip{border:1px solid var(--bd);background:var(--gl);color:var(--tx);border-radius:99px;padding:7px 14px;font:600 .88rem Nunito,sans-serif;cursor:pointer;transition:.2s}.chip:hover{transform:translateY(-2px)}.chip.on{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;border-color:transparent}
+.ic{background:none;border:0;cursor:pointer;font-size:1.1rem;padding:4px 8px;border-radius:10px;transition:.2s;color:var(--mu)}.ic:hover{background:var(--bd);transform:scale(1.2)}
+.hrt.on{color:#f43f5e;animation:beat .5s}
+.act{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.pimg{aspect-ratio:4/3;border-radius:14px;overflow:hidden;cursor:zoom-in;background:linear-gradient(135deg,#fbcfe8,#ddd6fe);display:grid;place-items:center;font-size:3rem;margin-bottom:10px}.pimg img{width:100%;height:100%;object-fit:cover;transition:.4s}.card:hover .pimg img{transform:scale(1.08)}
+.card p{margin:4px 0;color:var(--mu)}small{color:var(--mu)}
+.sh{font-size:1.8rem;margin:20px 4px 12px}
+.empty{text-align:center;padding:40px 16px;color:var(--mu);font-size:1.1rem}.empty div{font-size:3rem}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;align-items:start}
+.col{padding:14px;border-radius:24px;border:1px dashed var(--bd)}.col>.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.col h3{font-size:1.6rem}
+.col .card{margin-bottom:12px}.top{display:flex;justify-content:space-between;gap:8px;align-items:start}
+.pill{font-size:.75rem;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--bd);white-space:nowrap}.pill.c{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff}
+.bar{height:10px;border-radius:9px;background:var(--bd);overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:9px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.done{box-shadow:0 0 24px rgba(245,158,11,.4)}
+.tl{position:relative;margin-left:26px;border-left:2px dashed var(--bd);padding-left:34px}
+.tli{position:relative;margin-bottom:20px}.tli .bdg{position:absolute;left:-56px;top:8px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;background:var(--c);box-shadow:0 0 0 5px var(--b1),0 0 18px var(--c)}
+.tli img{width:100%;max-height:260px;object-fit:cover;border-radius:14px;margin-top:8px}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(40,10,70,.55);backdrop-filter:blur(6px);display:grid;place-items:center;padding:16px;animation:fade .25s}
+.md{width:min(480px,100%);max-height:90vh;overflow:auto;background:var(--b1);border:1px solid var(--bd);border-radius:24px;padding:22px;box-shadow:var(--sh);animation:pop .3s}.md h3{font-size:1.7rem}
+.lb{max-width:min(900px,100%);text-align:center;cursor:zoom-out;color:#fff}.lb img{max-width:100%;max-height:72vh;border-radius:16px}.lb .big{font-size:8rem}.lb p{color:#f3e8ff}
+label{display:block;margin:10px 0;font-weight:600;font-size:.9rem;color:var(--mu)}
+input,select,textarea{width:100%;margin-top:4px;padding:10px 12px;border-radius:12px;border:1px solid var(--bd);background:var(--gl);color:var(--tx);font:inherit}textarea{min-height:80px;resize:vertical}
+.pv{width:100%;max-height:140px;object-fit:cover;border-radius:12px;margin-top:8px}
+.row{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+.bt{position:fixed;z-index:60;pointer-events:none;font-size:1.4rem;animation:fly 1.2s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(1.4);opacity:0}}
+@keyframes fade{from{opacity:0}}@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}}
+@keyframes beat{50%{transform:scale(1.18)}}
+body.noanim *,body.noanim *::before{animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+</style></head><body>
+<canvas id="bg"></canvas>
+<nav><a class="br" href="#home">✦ Our Little Universe</a><a data-p="mem" href="#mem">Our Memories</a><a data-p="love" href="#love">Things We Love</a><a data-p="dreams" href="#dreams">Our Dreams</a><a data-p="ach" href="#ach">Our Achievements</a><span class="pill" id="sy">💾 This device</span><button class="chip" id="tg" aria-pressed="true">✨ Magic</button></nav>
+<main id="app"></main>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])),uid=()=>Math.random().toString(36).slice(2,9),today=()=>new Date().toISOString().slice(0,10),fd=d=>d?new Date(d+"T00:00").toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}):"";
+let S,page="home",memF="all",loveC,achF="all";
+const DB={open:()=>new Promise((r,j)=>{const q=indexedDB.open("ourlittleuniverse",1);q.onupgradeneeded=()=>q.result.createObjectStore("kv");q.onsuccess=()=>r(q.result);q.onerror=j}),
+async get(){try{const d=await this.open();return await new Promise(r=>{const q=d.transaction("kv").objectStore("kv").get("s");q.onsuccess=()=>r(q.result);q.onerror=()=>r()})}catch(e){}},
+async set(v){try{const d=await this.open();d.transaction("kv","readwrite").objectStore("kv").put(v,"s")}catch(e){}}};
+/* ===== SUPABASE SETTINGS: paste your two values here ===== */
+const SB={url:"https://gapapbdjmvicoojnbcgg.supabase.co",key:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdhcGFwYmRqbXZpY29vam5iY2dnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0NjY3MDYsImV4cCI6MjEwOTA0MjcwNn0.EL9iMDPH-zX2LCufx-2AXza7DBPNdikVSJY7lPGn_Hk"};
+const COLS=["mem","items","goals","ach"];let CL=false,last={},busy=0,sig="",PW="";
+try{PW=localStorage.getItem("olu-pw")||""}catch(e){}
+const save=()=>{DB.set(S);push()},sy=t=>{const e=$("#sy");if(e)e.textContent=t};
+const api=(path,o={})=>fetch(SB.url.replace(/\/$/,"")+"/rest/v1/"+path,{...o,headers:{apikey:SB.key,"x-passphrase":PW,"Content-Type":"application/json",...(o.headers||{})}}).then(r=>{if(!r.ok)throw r.status;return r.status==204?null:r.json().catch(()=>null)});
+const up=(col,id,data)=>api("items?on_conflict=col,id",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:JSON.stringify({col,id,data})});
+async function put(k,x){const j=JSON.stringify(x),key=k+"/"+x.id;if(last[key]==j)return;last[key]=j;try{await up(k,x.id,x)}catch(e){delete last[key];sy("⚠ Couldn’t sync one item")}}
+async function push(){if(!CL)return;busy++;try{for(const k of COLS){for(const x of S[k])await put(k,x);for(const key of Object.keys(last))if(key.startsWith(k+"/")&&!S[k].some(x=>k+"/"+x.id==key)){delete last[key];try{await api(`items?col=eq.${k}&id=eq.${encodeURIComponent(key.slice(k.length+1))}`,{method:"DELETE"})}catch(e){}}}const c=JSON.stringify(S.cats);if(last.cats!=c){last.cats=c;try{await up("meta","cats",{list:S.cats})}catch(e){}}}finally{busy--}}
+async function pull(f){if(busy||(document.hidden&&f!==1))return;try{const rows=await api("items?select=col,id,data"),g=JSON.stringify(rows);if(g==sig)return;sig=g;
+for(const k of COLS)S[k]=rows.filter(r=>r.col==k).map(r=>r.data).sort((a,b)=>(b.ts||0)-(a.ts||0));
+const c=rows.find(r=>r.col=="meta"&&r.id=="cats");if(c)S.cats=c.data.list;
+last={};rows.forEach(r=>{if(r.col!="meta")last[r.col+"/"+r.id]=JSON.stringify(r.data)});last.cats=JSON.stringify(S.cats);DB.set(S);render();sy("☁ Synced")}catch(e){sy("⚠ Offline, saved on this device")}}
+async function connect(){try{if(!SB.url.startsWith("http"))return sy("💾 This device");
+for(;;){if(!PW)PW=await new Promise(r=>form("Our secret word 💗",[{k:"p",l:"Type the passphrase you both use",t:"password",r:1}],{},o=>r(o.p)));
+try{await up("meta","ping",{t:1});break}catch(e){PW="";if(e!=401&&e!=403)return sy("⚠ Can’t reach Supabase");sy("🔒 Wrong passphrase")}}
+try{localStorage.setItem("olu-pw",PW)}catch(e){}
+CL=true;const rows=await api("items?select=col,id");
+if(!rows.some(r=>r.col=="meta"&&r.id=="init")){last={};await push();await up("meta","init",{done:1})}
+sig="";await pull(1);setInterval(pull,5000);addEventListener("focus",()=>pull(1))}catch(e){sy("⚠ Can’t reach Supabase")}}
+const CATS=["Our Favorite Games","Anime We Love","Favorite Movies & Shows","Our Favorite Songs","Favorite Foods","Places We Want to Visit","Little Things We Love About Each Other","Inside Jokes","Random Things We Love"];
+const AC=["Goals Achieved","Milestones Reached","Problems Overcome","Arguments Resolved"],AI=["🏆","🎉","🌱","🕊️"],AK=["#f59e0b","#ec4899","#34d399","#a78bfa"],ST=["Not Started","In Progress","Completed"];
+const seed=()=>({anim:true,cats:[...CATS],
+mem:[{id:uid(),title:"The day we met",date:"2024-02-14",album:"Beginnings",desc:"Replace me with your first photo. This is where it all began.",fav:true,e:"💌"},{id:uid(),title:"Our first trip together",date:"2025-06-01",album:"Adventures",desc:"Sunsets, snacks and getting lost on purpose.",fav:false,e:"🌅"},{id:uid(),title:"A quiet night in",date:"2025-11-20",album:"Everyday",desc:"Nothing special, which made it perfect.",fav:false,e:"🌙"}],
+items:[{id:uid(),cat:CATS[0],name:"Co-op adventures",desc:"Any game where we can play side by side."},{id:uid(),cat:CATS[1],name:"Our comfort anime",desc:"The one we rewatch when we miss each other."},{id:uid(),cat:CATS[6],name:"Your laugh",desc:"It fixes any bad day."},{id:uid(),cat:CATS[5],name:"Japan",desc:"Cherry blossoms, together."}],
+goals:[{id:uid(),who:"us",title:"Meet in person",desc:"The best day of our lives.",date:"",progress:40,status:"In Progress"},{id:uid(),who:"us",title:"Visit Japan together",desc:"Temples, ramen, and cherry blossoms.",date:"",progress:0,status:"Not Started"},{id:uid(),who:"her",title:"Learn something new",desc:"Her own ambition goes here.",date:"",progress:20,status:"In Progress"},{id:uid(),who:"me",title:"Build something we can be proud of",desc:"My own ambition goes here.",date:"",progress:10,status:"In Progress"}],
+ach:[{id:uid(),cat:AC[1],title:"Our first “I love you”",date:"2024-03-10",desc:"Three words, one very happy heart."},{id:uid(),cat:AC[2],title:"Getting through the distance",desc:"Late calls, patience, and trust carried us.",date:"2025-01-15"},{id:uid(),cat:AC[3],title:"The misunderstanding that taught us to listen",date:"2025-05-02",desc:"We paused, listened, and came out closer."}]});
+const shrink=f=>new Promise(r=>{const fr=new FileReader;fr.onload=()=>{const i=new Image;i.onload=()=>{let m=900,q=.78,u;do{const s=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*s;c.height=i.height*s;c.getContext("2d").drawImage(i,0,0,c.width,c.height);u=c.toDataURL("image/jpeg",q);m*=.85;q=Math.max(.45,q-.06)}while(u.length>180000&&m>200);r(u)};i.onerror=()=>r();i.src=fr.result};fr.readAsDataURL(f)});
+function modal(h,c="md"){const m=document.createElement("div");m.className="ov";m.innerHTML=`<div class="${c}" ${c=="lb"?"data-x":""}>${h}</div>`;m.onclick=e=>{if(e.target==m||e.target.closest("[data-x]"))m.remove()};document.body.append(m);return m}
+function form(t,F,v,ok){v=v||{};const m=modal(`<h3>${t}</h3><form>${F.map(f=>`<label>${f.l}${f.t=="area"?`<textarea name="${f.k}">${esc(v[f.k])}</textarea>`:f.t=="sel"?`<select name="${f.k}">${f.o.map(o=>`<option ${o==v[f.k]?"selected":""}>${esc(o)}</option>`).join("")}</select>`:f.t=="img"?`<input type="file" name="${f.k}" accept="image/*">${v[f.k]?`<img class="pv" src="${v[f.k]}" alt="">`:""}`:`<input name="${f.k}" type="${f.t||"text"}" value="${esc(v[f.k])}" ${f.t=="range"?"min=0 max=100":""} ${f.d?"list=dl":""} ${f.r?"required":""}>`}</label>`).join("")}<datalist id="dl">${(F.find(f=>f.d)?.d||[]).map(a=>`<option value="${esc(a)}">`).join("")}</datalist><div class="row"><button type="button" class="b ghost" data-x>Cancel</button><button class="b">Save</button></div></form>`);
+const f=m.querySelector("form");f.onsubmit=async e=>{e.preventDefault();const o={...v};for(const x of F){const el=f.elements[x.k];if(x.t=="img"){if(el.files[0])o[x.k]=await shrink(el.files[0])}else o[x.k]=x.t=="range"?+el.value:el.value}m.remove();ok(o)}}
+const ask=(t,ok)=>{const m=modal(`<h3>${t}</h3><div class="row"><button class="b ghost" data-x>Keep it</button><button class="b" id="y">Remove</button></div>`);m.querySelector("#y").onclick=()=>{m.remove();ok()}};
+const on=()=>S.anim!==false&&!matchMedia("(prefers-reduced-motion:reduce)").matches;
+function burst(x,y,E=["✨","💖","🌸"]){if(!on())return;for(let i=0;i<12;i++){const s=document.createElement("span");s.className="bt";s.textContent=E[i%E.length];s.style.cssText=`left:${x}px;top:${y}px;--dx:${(Math.random()-.5)*280}px;--dy:${-50-Math.random()*170}px`;document.body.append(s);setTimeout(()=>s.remove(),1300)}}
+const mid=()=>burst(innerWidth/2,innerHeight/2,["🎉","✨","💖","🏆"]);
+const find=(k,id)=>S[k].find(x=>x.id==id);
+function fix(k,o){if(k!="goals")return;if(o.status=="Completed")o.progress=100;else if(o.progress>=100)o.status="Completed";else if(o.progress>0&&o.status=="Not Started")o.status="In Progress"}
+function add(k,t,F,v){form(t,F,v,o=>{fix(k,o);S[k].unshift({...o,id:uid(),ts:Date.now()});save();render();if(k=="ach"||o.status=="Completed")mid()})}
+function edit(k,id,t,F){const g=find(k,id),was=g.status;form(t,F,g,o=>{fix(k,o);Object.assign(find(k,id)||g,o);save();render();if(k=="goals"&&o.status=="Completed"&&was!="Completed")mid()})}
+const del=(k,id)=>ask("Remove this? It can’t be undone.",()=>{S[k]=S[k].filter(x=>x.id!=id);save();render()});
+const albums=()=>[...new Set(S.mem.map(m=>m.album).filter(Boolean))];
+const MF=()=>[{k:"img",l:"Photo",t:"img"},{k:"title",l:"Title",r:1},{k:"date",l:"Date",t:"date"},{k:"album",l:"Album",d:albums()},{k:"desc",l:"Description",t:"area"}];
+const LF=()=>[{k:"img",l:"Picture (optional)",t:"img"},{k:"cat",l:"Category",t:"sel",o:S.cats},{k:"name",l:"Name",r:1},{k:"desc",l:"Description",t:"area"}];
+const GF=[{k:"title",l:"Goal title",r:1},{k:"desc",l:"Description",t:"area"},{k:"date",l:"Target date (optional)",t:"date"},{k:"status",l:"Status",t:"sel",o:ST},{k:"progress",l:"Progress (%)",t:"range"}];
+const AF=()=>[{k:"img",l:"Picture (optional)",t:"img"},{k:"cat",l:"Category",t:"sel",o:AC},{k:"title",l:"Title",r:1},{k:"date",l:"Date",t:"date"},{k:"desc",l:"What happened and what we learned",t:"area"}];
+const btns=(k,id,x="")=>`<span>${x}<button class="ic" data-a="e${k}" data-id="${id}" aria-label="Edit">✎</button><button class="ic" data-a="d${k}" data-id="${id}" aria-label="Delete">🗑</button></span>`;
+const hd=(t,p)=>`<header class="ph"><h2>${t}</h2><p>${p}</p></header>`,empty=(e,t)=>`<div class="empty"><div>${e}</div><p>${t}</p></div>`;
+const chip=(l,a,id,on)=>`<button class="chip ${on?"on":""}" data-a="${a}" data-id="${esc(id)}">${esc(l)}</button>`;
+const mc=(m,i)=>`<article class="card" style="--r:${(i%5-2)*.8}deg"><div class="pimg" data-a="view" data-id="${m.id}">${m.img?`<img src="${m.img}" alt="${esc(m.title)}">`:m.e||"💗"}</div><b>${esc(m.title)}</b><br><small>${fd(m.date)}${m.album?" · "+esc(m.album):""}</small><p>${esc(m.desc)}</p><div class="act"><button class="ic hrt ${m.fav?"on":""}" data-a="fav" data-id="${m.id}" aria-label="Favorite">${m.fav?"♥":"♡"}</button>${btns("mem",m.id)}</div></article>`;
+const R={
+home:()=>`<div class="hero"><svg class="heart" viewBox="0 0 100 90" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs><path d="M50 85C10 55 2 35 2 24 2 11 12 3 24 3c11 0 20 7 26 16C56 10 65 3 76 3c12 0 22 8 22 21 0 11-8 31-48 61z" fill="url(#hg)"/></svg><h1>Our Little Universe</h1><p>A little place for everything that makes us, us.</p><p>Welcome home, my love. Every memory, dream and victory of ours lives here, safe under the stars.</p></div><div class="tiles">${[["mem","📸","Our Memories","Photos, albums and favorites"],["love","💕","Things We Love","Everything that’s ours"],["dreams","🌙","Our Dreams","Goals for us, and for each of us"],["ach","🏆","Our Achievements","How far we’ve come"]].map(t=>`<a class="card" href="#${t[0]}">${t[1]}<b>${t[2]}</b><small>${t[3]}</small></a>`).join("")}</div>`,
+mem(){const grid=L=>`<div class="grid">${L.map(mc).join("")}</div>`;let b;
+if(!S.mem.length)b=empty("📷","No memories yet. Add your first photo of us!");
+else if(memF=="all"){const f=S.mem.filter(m=>m.fav),o=S.mem.filter(m=>!m.fav);b=(f.length?`<h3 class="sh">♥ Favorite Memories</h3>${grid(f)}`:"")+(o.length?`<h3 class="sh">All Our Moments</h3>${grid(o)}`:"")}
+else{const L=S.mem.filter(m=>memF=="♥"?m.fav:m.album==memF);b=L.length?grid(L):empty("🌸","Nothing in here yet.")}
+return hd("Our Memories 📸","A scrapbook of the moments we never want to forget.")+`<div class="bar2">${chip("All","mf","all",memF=="all")}${chip("♥ Favorites","mf","♥",memF=="♥")}${albums().map(a=>chip(a,"mf",a,memF==a)).join("")}<button class="b" data-a="addmem">＋ Add memory</button></div>`+b},
+love(){if(!S.cats.includes(loveC))loveC=S.cats[0];const L=S.items.filter(i=>i.cat==loveC);
+return hd("Things We Love 💕","Our favorite things, collected one by one.")+`<div class="bar2">${S.cats.map(c=>chip(c,"lc",c,c==loveC)).join("")}<button class="chip" data-a="addcat">＋ New category</button></div><div class="bar2"><button class="b" data-a="additems">＋ Add to “${esc(loveC||"…")}”</button>${S.cats.length?`<button class="b ghost" data-a="delcat">Remove category</button>`:""}</div>`+(!S.cats.length?empty("🌷","Create a category to get started."):L.length?`<div class="grid">${L.map((i,n)=>`<article class="card" style="--r:${(n%3-1)}deg">${i.img?`<div class="pimg" data-a="viewitem" data-id="${i.id}"><img src="${i.img}" alt=""></div>`:""}<b>${esc(i.name)}</b><p>${esc(i.desc)}</p><div class="act"><span>💗</span>${btns("items",i.id)}</div></article>`).join("")}</div>`:empty("💞","Nothing here yet. What do we love about this?"))},
+dreams(){const D=[["us","Our Goals Together","💞","Dreams we chase side by side"],["her","Her Personal Goals","🌸","Her ambitions, cheered on by me"],["me","My Personal Goals","🌙","My ambitions, cheered on by her"]];
+return hd("Our Dreams & Goals 🌙","The future we’re building, one small step at a time.")+`<div class="cols">${D.map(d=>{const L=S.goals.filter(g=>g.who==d[0]);return`<section class="col"><div class="top"><div><h3>${d[2]} ${d[1]}</h3><small>${d[3]}</small></div><button class="b" data-a="addgoal" data-id="${d[0]}">＋</button></div>${L.length?L.map(g=>`<div class="card ${g.status=="Completed"?"done":""}"><div class="top"><b>${esc(g.title)}</b><span class="pill ${g.status=="Completed"?"c":""}">${g.status}</span></div>${g.desc?`<p>${esc(g.desc)}</p>`:""}${g.date?`<small>🎯 ${fd(g.date)}</small>`:""}<div class="bar"><i data-w="${g.progress}"></i></div><div class="act"><small>${g.progress}%</small>${btns("goals",g.id,(g.status!="Completed"?`<button class="ic" data-a="bump" data-id="${g.id}" aria-label="Add 10%">＋10%</button>`:d[0]=="us"?`<button class="ic" data-a="toach" data-id="${g.id}" title="Add to achievements">🏆</button>`:""))}</div></div>`).join(""):empty("⭐","No goals yet. Dream a little!")}</section>`}).join("")}</div>`},
+ach(){const L=S.ach.filter(a=>achF=="all"||a.cat==achF).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+return hd("Our Achievements 🏆","Proof of how much we’ve grown together.")+`<div class="bar2">${chip("All","af","all",achF=="all")}${AC.map((c,i)=>chip(AI[i]+" "+c,"af",c,achF==c)).join("")}<button class="b" data-a="addach">＋ Add achievement</button></div>`+(L.length?`<div class="tl">${L.map(a=>{const i=Math.max(0,AC.indexOf(a.cat));return`<article class="tli"><div class="bdg" style="--c:${AK[i]}">${AI[i]}</div><div class="card"><div class="top"><b>${esc(a.title)}</b>${btns("ach",a.id)}</div><small>${fd(a.date)} · ${esc(a.cat)}</small><p>${esc(a.desc)}</p>${a.img?`<img src="${a.img}" alt="">`:""}</div></article>`}).join("")}</div>`:empty("🌱","Nothing here yet. Your story starts with one small win."))}};
+function render(){$("#app").innerHTML=`<section class="pg pg-${page}">${R[page]()}</section>`;document.querySelectorAll("nav [data-p]").forEach(a=>a.classList.toggle("on",a.dataset.p==page));document.querySelectorAll(".bar i").forEach(i=>{requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.width=i.dataset.w+"%"))})}
+const ACT={
+mf:id=>{memF=id;render()},lc:id=>{loveC=id;render()},af:id=>{achF=id;render()},
+addmem:()=>add("mem","Add a memory",MF(),{date:today()}),emem:id=>edit("mem",id,"Edit memory",MF()),dmem:id=>del("mem",id),
+fav:(id,b)=>{const m=find("mem",id);m.fav=!m.fav;save();const r=b.getBoundingClientRect();if(m.fav)burst(r.left+r.width/2,r.top,["💗","💖","💕"]);render()},
+view:id=>{const m=find("mem",id);modal(`${m.img?`<img src="${m.img}" alt="${esc(m.title)}">`:`<div class="big">${m.e||"💗"}</div>`}<h3>${esc(m.title)}</h3><small>${fd(m.date)} ${esc(m.album||"")}</small><p>${esc(m.desc)}</p>`,"lb")},
+viewitem:id=>{const m=find("items",id);modal(`<img src="${m.img}" alt=""><h3>${esc(m.name)}</h3><p>${esc(m.desc)}</p>`,"lb")},
+additems:()=>S.cats.length&&add("items","Add something we love",LF(),{cat:loveC}),eitems:id=>edit("items",id,"Edit",LF()),ditems:id=>del("items",id),
+addcat:()=>form("New category",[{k:"n",l:"Category name",r:1}],{},o=>{const n=o.n.trim();if(n&&!S.cats.includes(n))S.cats.push(n);loveC=n;save();render()}),
+delcat:()=>ask("Remove “"+esc(loveC)+"” and everything in it?",()=>{S.cats=S.cats.filter(c=>c!=loveC);S.items=S.items.filter(i=>i.cat!=loveC);save();render()}),
+addgoal:who=>form("Add a goal",GF,{status:"Not Started",progress:0},o=>{fix("goals",o);S.goals.unshift({...o,who,id:uid(),ts:Date.now()});save();render();if(o.status=="Completed")mid()}),
+egoals:id=>edit("goals",id,"Edit goal",GF),dgoals:id=>del("goals",id),
+bump:id=>{const g=find("goals",id);g.progress=Math.min(100,g.progress+10);fix("goals",g);save();render();if(g.status=="Completed")mid()},
+toach:id=>{const g=find("goals",id);S.ach.unshift({id:uid(),ts:Date.now(),cat:AC[0],title:g.title,desc:g.desc,date:today()});save();achF=AC[0];location.hash="ach";mid()},
+addach:()=>add("ach","Add an achievement",AF(),{date:today(),cat:AC.includes(achF)?achF:AC[1]}),each:id=>edit("ach",id,"Edit achievement",AF()),dach:id=>del("ach",id)};
+$("#app").onclick=e=>{const b=e.target.closest("[data-a]");if(b)ACT[b.dataset.a]?.(b.dataset.id,b)};
+addEventListener("keydown",e=>{if(e.key=="Escape")document.querySelector(".ov:last-of-type")?.remove()});
+function go(){const h=location.hash.slice(1);page=R[h]?h:"home";render();scrollTo(0,0)}addEventListener("hashchange",go);
+/* background */
+const cv=$("#bg"),cx=cv.getContext("2d");let W,H,P=[],T=[],raf,dk;
+const rs=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight;dk=matchMedia("(prefers-color-scheme:dark)").matches};addEventListener("resize",rs);rs();
+const mk=k=>({k,x:Math.random()*W,y:Math.random()*H,s:k=="s"?Math.random()*1.5+.5:Math.random()*7+6,v:Math.random()*.6+.3,a:Math.random()*6.28,w:Math.random()*.02+.006});
+for(let i=0;i<70;i++)P.push(mk("s"));for(let i=0;i<14;i++)P.push(mk("p"));for(let i=0;i<7;i++)P.push(mk("f"));
+function draw(){cx.clearRect(0,0,W,H);for(const p of P){p.a+=p.w;if(p.k=="s"){cx.globalAlpha=.25+.6*Math.abs(Math.sin(p.a*3));cx.fillStyle=dk?"#fff":"#c084fc";cx.beginPath();cx.arc(p.x,p.y,p.s,0,6.3);cx.fill();continue}
+p.y+=p.v;p.x+=Math.sin(p.a)*.6;if(p.y>H+20){p.y=-20;p.x=Math.random()*W}cx.globalAlpha=.55;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.k=="p"?"#f9a8d4":"#e9d5ff";
+if(p.k=="p"){cx.beginPath();cx.ellipse(0,0,p.s,p.s/2,0,0,6.3);cx.fill()}else{for(let j=0;j<5;j++){cx.rotate(1.2566);cx.beginPath();cx.arc(p.s/2,0,p.s/3,0,6.3);cx.fill()}cx.fillStyle="#fde68a";cx.beginPath();cx.arc(0,0,p.s/4,0,6.3);cx.fill()}cx.restore()}
+cx.fillStyle="#f472b6";for(const t of T){t.l-=.03;cx.globalAlpha=Math.max(0,t.l*.6);cx.beginPath();cx.arc(t.x,t.y,4*t.l,0,6.3);cx.fill()}T=T.filter(t=>t.l>0)}
+function loop(){if(!on())return;draw();raf=requestAnimationFrame(loop)}
+function setAnim(){cancelAnimationFrame(raf);document.body.classList.toggle("noanim",!on());$("#tg").setAttribute("aria-pressed",S.anim!==false);$("#tg").textContent=S.anim!==false?"✨ Magic on":"✨ Magic off";if(on())loop();else cx.clearRect(0,0,W,H)}
+$("#tg").onclick=()=>{S.anim=S.anim===false;save();setAnim()};
+addEventListener("mousemove",e=>{if(on()&&T.length<40)T.push({x:e.clientX,y:e.clientY,l:1})});
+(async()=>{S=await DB.get()||seed();if(!S.cats)S.cats=[...CATS];await save();setAnim();go();connect()})();
+</script></body></html>
